@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Classification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .upload-section {
+            margin: 20px;
+        }
+
+        .result-section {
+            margin: 20px;
+        }
+
+        .image-preview {
+            max-width: 100%;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .probability-bar {
+            width: 100%;
+            height: 10px;
+            background-color: violet;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+
+        .probability-label {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .submit-btn {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="upload-section">
+            <h2>Upload an Image</h2>
+            <form action="/" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" accept=".jpg, .jpeg, .png" required>
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+            {% if error %}
+                <p style="color: red;">{{ error }}</p>
+            {% endif %}
+        </div>
+
+        {% if uploaded_image %}
+        <div class="result-section">
+            <h2>Results</h2>
+            <div class="image-preview">
+                <img src="{{ url_for('static', filename='temp_image.jpg') }}" alt="Uploaded Image: " style="max-width: 100%;">
+
+            </div>
+            <div class="probability-bar" style="width: {{ probabilities[0].item()*100 }}%;"></div>
+            <p class="probability-label">Dosa: {{ "{:.2f}".format(probabilities[0].item()*100) }}%</p>
+            <div class="probability-bar" style="width: {{ probabilities[1].item()*100 }}%;"></div>
+            <p class="probability-label">Idli: {{ "{:.2f}".format(probabilities[1].item()*100) }}%</p>
+            <div class="probability-bar" style="width: {{ probabilities[2].item()*100 }}%;"></div>
+            <p class="probability-label">Vada: {{ "{:.2f}".format(probabilities[2].item()*100) }}%</p>
+        </div>
+    {% endif %}
+    
+    </div>
+</body>
+</html>
