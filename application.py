@@ -9,7 +9,7 @@ import cv2
 
 import os
 application = Flask(__name__, static_url_path='/static')
-
+app = application
 
 
 # Load the pre-trained ResNet50 model with modifications
@@ -110,4 +110,4 @@ def index():
     return render_template('index.html', error=error, probabilities=probabilities, uploaded_image=uploaded_image)
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0")
+    application.run(host="0.0.0.0")
