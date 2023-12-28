@@ -9,7 +9,7 @@ import cv2
 
 import os
 application = Flask(__name__, static_url_path='/static')
-app= application
+
 
 
 # Load the pre-trained ResNet50 model with modifications
