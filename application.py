@@ -111,4 +111,7 @@ def index():
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
-    application.run(host='0.0.0.0', port=port)
+    try:
+        application.run(host='0.0.0.0', port=port)
+    except Exception as e:
+        print(f"An error occurred: {e}")
