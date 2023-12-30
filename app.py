@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, request
 import torch
 import torchvision.transforms as transforms
@@ -8,8 +9,8 @@ import torch.nn as nn
 import cv2
 
 import os
-app = Flask(__name__, static_url_path='/static')
-
+application = Flask(__name__, static_url_path='/static')
+app = application
 
 
 # Load the pre-trained ResNet50 model with modifications
@@ -86,15 +87,16 @@ def index():
                 # Check if the file is allowed
                 if file:
                     # Save the uploaded file temporarily
-                    file_path = os.path.join('C:\\Users\\DELL23\\Downloads\\food_Classification\\static', 'temp_image.jpg')
-                    print(file_path)
+                    file_path = os.path.join('static', 'temp_image.jpg')
+                    print("File Received.",file_path)
                     file.save(file_path)
 
                     # Get predictions
                     probabilities = predict_image(file_path)
+                    print("Probs:",probabilities)
 
                     # Move the file to the 'static' folder
-                    new_file_path = os.path.join('C:\\Users\\DELL23\\Downloads\\food_Classification\\static', 'temp_image.jpg')
+                    new_file_path = os.path.join('static', 'temp_image.jpg')
 
                     os.rename(file_path, new_file_path)
                     print("New file_path:", new_file_path)
@@ -107,7 +109,11 @@ def index():
                     uploaded_image = file_path
                     print(uploaded_image)
                  
-    return render_template('index.html', error=error, probabilities=probabilities, uploaded_image=uploaded_image)
+    return render_template(r"index.html", error=error, probabilities=probabilities, uploaded_image=uploaded_image)
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5000))
+    try:
+        application.run(host='0.0.0.0', port=port)
+    except Exception as e:
+        print(f"An error occurred: {e}")
