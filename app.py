@@ -86,7 +86,7 @@ def index():
                 # Check if the file is allowed
                 if file:
                     # Save the uploaded file temporarily
-                    file_path = os.path.join('\static', 'temp_image.jpg')
+                    file_path = os.path.join('static', 'temp_image.jpg')
                     print(file_path)
                     file.save(file_path)
 
@@ -94,7 +94,7 @@ def index():
                     probabilities = predict_image(file_path)
 
                     # Move the file to the 'static' folder
-                    new_file_path = os.path.join('\static', 'temp_image.jpg')
+                    new_file_path = os.path.join('static', 'temp_image.jpg')
 
                     os.rename(file_path, new_file_path)
                     print("New file_path:", new_file_path)
