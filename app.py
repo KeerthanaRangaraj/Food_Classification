@@ -87,11 +87,12 @@ def index():
                 if file:
                     # Save the uploaded file temporarily
                     file_path = os.path.join('static', 'temp_image.jpg')
-                    print(file_path)
+                    print("File Received.",file_path)
                     file.save(file_path)
 
                     # Get predictions
                     probabilities = predict_image(file_path)
+                    print("Probs:",probabilities)
 
                     # Move the file to the 'static' folder
                     new_file_path = os.path.join('static', 'temp_image.jpg')
