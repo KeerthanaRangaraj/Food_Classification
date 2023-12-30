@@ -109,6 +109,7 @@ def index():
                  
     return render_template(r"templates\index.html", error=error, probabilities=probabilities, uploaded_image=uploaded_image)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=10000)
 
-    app.run(debug=True)
+
