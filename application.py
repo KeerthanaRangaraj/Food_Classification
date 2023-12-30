@@ -9,7 +9,7 @@ import torch.nn as nn
 import cv2
 
 import os
-application = Flask(__name__, static_url_path='/static')
+app = Flask(__name__, static_url_path='/static')
 
 
 # Load the pre-trained ResNet50 model with modifications
@@ -66,7 +66,7 @@ def predict_image(image_path):
     # Return class labels and probabilities
     return probabilities
 
-@application.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     error = None
     probabilities = None
@@ -111,4 +111,4 @@ def index():
 
 if __name__ == '__main__':
 
-    application.run(debug=True)
+    app.run(debug=True)
