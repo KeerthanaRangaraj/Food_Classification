@@ -107,7 +107,7 @@ def index():
                     uploaded_image = file_path
                     print(uploaded_image)
                  
-    return render_template(r"templates/index.html", error=error, probabilities=probabilities, uploaded_image=uploaded_image)
+    return render_template(r"index.html", error=error, probabilities=probabilities, uploaded_image=uploaded_image)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
